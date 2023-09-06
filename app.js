@@ -37,8 +37,6 @@ const fetchProducts = (limit, page) => {
       }
     })
     .then((data) => {
-      // console.log(data.products.map((e) => e.title));
-      //   showProducts(data.products);
       products = data.products;
       TOTAL = data.total;
       console.log(products);
@@ -69,7 +67,6 @@ function initApp() {
 
 function addToCard(key) {
   if (listCards[key] == null) {
-    // copy product form list to list card
     listCards[key] = JSON.parse(JSON.stringify(products[key]));
     listCards[key].quantity = 1;
   }
@@ -88,8 +85,8 @@ function reloadCard() {
       let newDiv = document.createElement("li");
       newDiv.innerHTML = `
                 <div><img src="${thumbnail}"/></div>
-                <div>${title}</div>
-                <div>${price.toLocaleString()}</div>
+                <div style="margin-left: 10px;">${title}</div>
+                <div>$${price.toLocaleString()}</div>
                 <div>
                     <button onclick="changeQuantity(${key}, ${
         value.quantity - 1
@@ -99,7 +96,7 @@ function reloadCard() {
         value.quantity + 1
       })">+</button>
                 </div>
-                <button onclick="deleteCard(${key})">Delete</button>`;
+                <button style="background: red; padding: 10px 20px; color: #fff" onclick="deleteCard(${key})">Delete</button>`;
       listCard.appendChild(newDiv);
     }
   });
@@ -121,47 +118,17 @@ function deleteCard(key) {
   reloadCard();
 }
 
-smartphones.addEventListener("click", () => {
-  window.location.reload();
-
-  console.log(cat);
-  cat = "category/smartphones";
-  fetchProducts(20, 1);
-});
-laptops.addEventListener("click", () => {
-  //   window.location.reload();
-
-  console.log(cat);
-  cat = "category/laptops";
-  //   fetch(`https://dummyjson.com/products/?limit=10&skip=10`)
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Request failed with status " + response.status);
-  //       }
-  //       const contentType = response.headers.get("Content-Type");
-  //       if (contentType && contentType.includes("application/json")) {
-  //         return response.json();
-  //       } else {
-  //         throw new Error("Response is not JSON");
-  //       }
-  //     })
-  //     .then((data) => {
-  //       // console.log(data.products.map((e) => e.title));
-  //       //   showProducts(data.products);
-  //       products = data.products;
-  //       TOTAL = data.total;
-  //       console.log(products);
-  //       initApp(data.products);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-});
-fragrances.addEventListener("click", () => {
-  console.log(cat);
-  //   window.location.reload();
-  cat = "category/fragrances";
-  fetchProducts(20, 3);
-});
+// smartphones.addEventListener("click", () => {
+//   fetchProducts(20, 1);
+//   initApp(products);
+// });
+// laptops.addEventListener("click", () => {
+//   fetchProducts(20, 2);
+//   initApp(products);
+// });
+// fragrances.addEventListener("click", () => {
+//   fetchProducts(20, 3);
+//   initApp(products);
+// });
 
 fetchProducts(20, 1);
