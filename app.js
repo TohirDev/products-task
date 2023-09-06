@@ -39,7 +39,7 @@ const fetchProducts = (limit, page) => {
     .then((data) => {
       products = data.products;
       TOTAL = data.total;
-      console.log(products);
+      //   console.log(products);
       initApp(data.products);
     })
     .catch((error) => {
